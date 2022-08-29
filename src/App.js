@@ -1,8 +1,8 @@
 import React from 'react'
 import { configureStore } from '@reduxjs/toolkit'
 import { Provider } from 'react-redux'
-import moviesReducer from './MovieLibrary/store/reducers/moviesReducer'
-import MovieLibrary from './MovieLibrary/components/MovieLibrary'
+import moviesReducer from './utils/store/reducers/moviesReducer'
+import MovieLibrary from './components/MovieLibrary'
 
 const store = configureStore({
   reducer: {
