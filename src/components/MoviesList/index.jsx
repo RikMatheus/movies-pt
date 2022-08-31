@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 
 import { FaTimes } from "react-icons/fa"
 
@@ -18,6 +18,22 @@ export default function MoviesList({ movies }) {
 
 	const handleSortingChange = (event) => {
 		setSortingType(event.target.value)
+
+		switch(event.target.value) {
+			case "name_asc":
+				movies.sort((a, b) => a.title.localeCompare(b.title))
+				break
+			case "name_desc":
+				movies.sort((a, b) => b.title.localeCompare(a.title))
+				break
+			case "rating":
+				movies.sort((a, b) => {
+					if (a.vote_average > b.vote_average) return -1
+					if (a.vote_average < b.vote_average) return 1
+					if (a.vote_average == b.vote_average) return 0
+				})
+				break
+		}
 	}
 
 	const handleModalClose = () => {

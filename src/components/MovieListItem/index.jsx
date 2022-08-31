@@ -26,10 +26,6 @@ export default function MovieListItem({ movie, isSelected, onSelect }) {
 	const { title, vote_average, poster_path, release_date } = movie
 	const className = `movie-list-item ${isSelected ? "selected" : ""}`
 
-	useEffect(() => {
-		console.log(movie)
-	}, [])
-
 	return (
 		<StyledItem onClick={handleClick}>
 			<div className="item__poster">
