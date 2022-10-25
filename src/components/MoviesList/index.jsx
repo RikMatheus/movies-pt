@@ -4,53 +4,68 @@ import { FaTimes } from "react-icons/fa"
 
 import TMDBImage from "../TMDBImage"
 import MovieListItem from "../MovieListItem"
-import { StyledList, StyledModal } from "./styles"
+import { StyledList, StyledModal, StyledSelector, StyledButton } from "./styles"
 
 export default function MoviesList({ movies }) {
 	const [selectedMovie, setSelectedMovie] = useState(null)
 	const [sortingType, setSortingType] = useState("")
 	const [modalShow, setModalShow] = useState(false)
+	const [currentMovies, setCurrentMovies] = useState(movies)
 
 	const handleSelectMovie = (movie) => {
 		setSelectedMovie(movie)
 		setModalShow(true)
 	}
 
-	const handleSortingChange = (event) => {
-		setSortingType(event.target.value)
-
-		switch(event.target.value) {
-			case "name_asc":
-				movies.sort((a, b) => a.title.localeCompare(b.title))
-				break
-			case "name_desc":
-				movies.sort((a, b) => b.title.localeCompare(a.title))
-				break
-			case "rating":
-				movies.sort((a, b) => {
-					if (a.vote_average > b.vote_average) return -1
-					if (a.vote_average < b.vote_average) return 1
-					if (a.vote_average == b.vote_average) return 0
-				})
-				break
-		}
-	}
-
 	const handleModalClose = () => {
 		setModalShow(false)
 	}
 
+	const SortingOptions = ({ selectedOption }) => {
+		return (
+			<StyledSelector>
+				<div className="selector__title">
+					<p>Sort by:</p>
+				</div>
+				<div className="selector__options">
+					<StyledButton selected={selectedOption == "name_asc"} onClick={() => setSortingType("name_asc")}>A-Z</StyledButton>
+					<StyledButton selected={selectedOption == "name_desc"} onClick={() => setSortingType("name_desc")}>Z-A</StyledButton>
+					<StyledButton selected={selectedOption == "rating"} onClick={() => setSortingType("rating")}>Rating</StyledButton>
+				</div>
+			</StyledSelector>
+		)
+	}
+
+	useEffect(() => {
+		setCurrentMovies(movies)
+		setSortingType("")
+	}, [movies])
+
+	useEffect(() => {
+		switch(sortingType) {
+			case "name_asc":
+				setCurrentMovies([...currentMovies].sort((a, b) => a.title.localeCompare(b.title)))
+				break
+			case "name_desc":
+				setCurrentMovies([...currentMovies].sort((a, b) => b.title.localeCompare(a.title)))
+				break
+			case "rating":
+				setCurrentMovies([...currentMovies].sort((a, b) => {
+					if (a.vote_average > b.vote_average) return -1
+					if (a.vote_average < b.vote_average) return 1
+					if (a.vote_average == b.vote_average) return 0
+				}))
+				break
+		}
+	}, [sortingType])
+
 	return (
 		<StyledList>
-      <section className="list__filters">
-        <span>Sort by:</span>
-        <SortingOptions
-          selectedOption={sortingType}
-          onChange={handleSortingChange}
-        />
-      </section>
+      <SortingOptions
+				selectedOption={sortingType}
+			/>
       <section className="list__items">
-        {movies.map((movie) => (
+        {currentMovies.map((movie) => (
           <div className="list__item">
             <MovieListItem
               key={movie.id}
@@ -101,16 +116,5 @@ const ExpandedMovieItem = ({
 				</div>
 			</div>
 		</StyledModal>
-	)
-}
-
-function SortingOptions({ selectedOption, onChange }) {
-	return (
-		<select value={selectedOption} onChange={onChange}>
-			<option value=""></option>
-			<option value="name_asc">A to Z</option>
-			<option value="name_desc">Z to A</option>
-			<option value="rating">Rating</option>
-		</select>
 	)
 }
