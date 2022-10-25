@@ -105,3 +105,53 @@ export const StyledModal = styled.div`
     display: none;
   `}
 `
+
+export const StyledSelector = styled.div`
+	position: fixed;
+	bottom: 1rem;
+	right: 1rem;
+	z-index: 100;
+	display: flex;
+	align-items: center;
+	border-radius: 999px;
+	padding: .5rem;
+	background-color: #eee;
+	color: #333;
+	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+	
+	.selector__title {
+		margin: 0 .5rem;
+	}
+
+	.selector__options {
+		
+	}
+`
+
+export const StyledButton = styled.button`
+	padding: .25rem .5rem;
+	border: none;
+	margin-right: .25rem;
+	transition: 0.2s ease-in-out;
+	cursor: pointer;
+
+	:first-child {
+		border-radius: 1rem 0 0 1rem;
+	}
+
+	:last-child {
+		border-radius: 0 1rem 1rem 0;
+		margin-right: 0;
+	}
+
+	${props => props.selected ? `
+		background: #333;
+		color: #eee;
+	` : `
+		background: #ccc;
+
+		:hover {
+			background: #ddd;
+		}
+	`}
+`

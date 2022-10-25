@@ -11,7 +11,7 @@ const Average = ({avg}) => {
 			<div className="avg__calc">
 				<div className="avg__total">
 					{
-						[1, 2, 3, 4, 5].map(item => {return (<FaStar />)})
+						[1, 2, 3, 4, 5].map((item, index) => {return (<FaStar key={index} />)})
 					}
 				</div>
 				<div className="avg__current" />
