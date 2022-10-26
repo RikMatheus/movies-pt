@@ -3,9 +3,12 @@ const theme = {
 		primary: "#333",
 		secondary: "#eee",
 		tertiary: "#ccc",
+		accent: "#d6b745",
 		black: "#000000",
 		white: "#ffffff",
 		background: "#333333",
+		ptDark: "#2E4FFC",
+		ptLight: "#FC00ED" 
 	},
 
 	fontSizes: {

@@ -33,11 +33,11 @@ export default function MovieListItem({ movie, isSelected, onSelect }) {
 			</div>
 			<div className="item__informations">
 				{/* <StyledAverage avg={vote_average}>{vote_average}</StyledAverage> */}
-				<Average avg={vote_average} />
 				<div className="item__details">
 					<h3 className="item__title">{title}</h3>
-					<p className="item__release">{release_date}</p>
+					{/* <p className="item__release">{release_date}</p> */}
 				</div>
+				<Average avg={vote_average} />
 			</div>
 		</StyledItem>
 	)
