@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react"
-
-import { FaTimes } from "react-icons/fa"
+import { motion, AnimatePresence } from "framer-motion"
 
 import TMDBImage from "../TMDBImage"
 import MovieListItem from "../MovieListItem"
@@ -98,23 +97,65 @@ const ExpandedMovieItem = ({
 	}
 
 	return (
-		<StyledModal open={open} onClick={handleModalClose}>
-			<div className="modal__content" onClick={handleModal}>
-				<button className="modal__close" onClick={handleModalClose}><FaTimes/></button>
-				<TMDBImage src={poster_path} className="modal__poster" />
-				<div className="modal__description">
-					<div className="modal__header">
-						<h2 className="modal__title">
-							{title}
-						</h2>
-						<h3 className="modal__original-title">({original_title})</h3>
-					</div>
-					<div className="modal__informations">
-						<h4>{vote_average}/10 ({vote_count} votes)</h4>
-					</div>
-					<p className="modal__overview">{overview}</p>
-				</div>
-			</div>
-		</StyledModal>
+		<AnimatePresence>
+			{ open && <StyledModal>
+				<motion.div 
+					className="modal"
+					onClick={handleModalClose}
+					initial={{
+						opacity: 0,
+					}}
+					animate={{
+						opacity: 1,
+					}}
+					exit={{
+						opacity: 0,
+					}}
+				>
+					<motion.div
+						className="modal__content"
+						onClick={handleModal}
+						initial={{
+							opacity: 0,
+							left: "50%",
+							top: "50%",
+							x: "-50%",
+							y: "50%",
+						}}
+						animate={{
+							opacity: 1,
+							left: "50%",
+							top: "50%",
+							x: "-50%",
+							y: "-50%",
+						}}
+						exit={{
+							opacity: 0,
+							left: "50%",
+							top: "50%",
+							x: "-50%",
+							y: "50%",
+						}}
+					>
+						<button className="modal__close" onClick={handleModalClose}>&times;</button>
+						<div className="modal__poster">
+							<TMDBImage src={poster_path} />
+						</div>
+						<div className="modal__description">
+							<div className="modal__header">
+								<h2 className="modal__title">
+									{title}
+								</h2>
+								<h3 className="modal__original-title">({original_title})</h3>
+							</div>
+							<div className="modal__informations">
+								<h4>{vote_average}/10 ({vote_count} votes)</h4>
+							</div>
+							<p className="modal__overview">{overview}</p>
+						</div>
+					</motion.div>
+				</motion.div>
+			</StyledModal> }
+		</AnimatePresence>
 	)
 }

@@ -54,7 +54,7 @@ export default function MovieLibrary() {
   return (
     <StyledLibrary>
       <div className="library">
-        { movies.length && <MoviesList movies={movies}/> }
+        { movies.length ? <MoviesList movies={movies}/> : <></> }
       </div>
       <div className="observer" ref={observerRef}>
         <span className="loader"></span>

@@ -7,6 +7,7 @@ export const StyledHeader = styled.div`
   /* position: fixed; */
   background: rgb(46,79,252);
   background: linear-gradient(90deg, ${theme.colors.ptDark} 0%, ${theme.colors.ptLight} 100%); 
+  color: ${theme.colors.secondary};
   z-index: 999;
   
   .container {
@@ -27,6 +28,6 @@ export const StyledHeader = styled.div`
 
   .title {
     font-size: ${theme.fontSizes.xl};
-    color: ${theme.colors.secondary};
+    margin-left: .5rem;
   }
 `
