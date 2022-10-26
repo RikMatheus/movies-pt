@@ -8,8 +8,12 @@ export const StyledList = styled.section`
 
 	.list__items {
 		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+		grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
 		grid-gap: 1rem;
+
+		@media ${theme.breakpoints.sm} {
+			grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+		}
 	}
 
 	.list__item {
@@ -109,22 +113,31 @@ export const StyledModal = styled.div`
 export const StyledSelector = styled.div`
 	position: fixed;
 	bottom: 1rem;
-	right: 1rem;
+	right: 50%;
+	appearance: none;
+	transform: translateX(50%);
 	z-index: 100;
 	display: flex;
 	align-items: center;
+	justify-content: center;
 	border-radius: 999px;
 	padding: .5rem;
 	background-color: #eee;
 	color: #333;
 	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-	
+	width: fit-content;
+
 	.selector__title {
 		margin: 0 .5rem;
 	}
 
 	.selector__options {
 		
+	}
+
+	@media ${theme.breakpoints.md} {
+		right: 1rem;
+		transform: translateX(0);
 	}
 `
 
@@ -145,7 +158,7 @@ export const StyledButton = styled.button`
 	}
 
 	${props => props.selected ? `
-		background: #333;
+		background: ${theme.colors.ptDark};
 		color: #eee;
 	` : `
 		background: #ccc;

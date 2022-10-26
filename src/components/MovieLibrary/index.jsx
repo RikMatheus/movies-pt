@@ -57,7 +57,8 @@ export default function MovieLibrary() {
         { movies.length && <MoviesList movies={movies}/> }
       </div>
       <div className="observer" ref={observerRef}>
-        Loading more movies
+        <span className="loader"></span>
+        <p>Loading more movies...</p>
       </div>
     </StyledLibrary>
   )
