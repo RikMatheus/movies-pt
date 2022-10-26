@@ -30,61 +30,90 @@ export const StyledList = styled.section`
 `
 
 export const StyledModal = styled.div`
-	position: fixed;
-	z-index: 10;
-	inset: 0;
-	background-color: rgba(0, 0, 0, 0.8);
+	.modal {
+		position: fixed;
+		z-index: 999;
+		inset: 0;
+		background-color: rgba(0, 0, 0, 0.7);
+	}
 
 	.modal__close {
 		position: absolute;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		right: -1.35rem;
-		top: -1.355rem;
+		right: .5rem;
+		top: .5rem;
 		width: 2.5rem;
 		height: 2.5rem;
 		border: none;
-		border-radius: 2.5rem;
+		border-radius: .75rem;
 		cursor: pointer;
-		transition: 0.2s ease-in-out;
-
-		svg {
-			width: 1.75rem;
-			height: 1.75rem;
-			color: ${theme.colors.primary};
-		}
+		transition: 0.3s ease;
+		font-size: ${theme.fontSizes.exl};
+		background-color: ${theme.colors.ptLight}33;
+		color: ${theme.colors.primary};
 
 		:hover {
-			transform: scale(1.25);
+			background-color: ${theme.colors.ptLight};
+			color: ${theme.colors.secondary};
 		}
 	}
 
 	.modal__content {
 		position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-		border: 2px solid ${theme.colors.white};
+		display: flex;
+		flex-direction: column;
+		width: 80%;
+		height: 90%;
 		max-width: 64rem;
 		max-height: 36rem;
-		padding: 1rem;
+		padding: .5rem;
 		border-radius: 1rem;
-		background: ${theme.colors.background};
-		display: flex;
+		background: ${theme.colors.secondary};	
+		overflow: auto;
+
+		@media ${theme.breakpoints.md} {
+			flex-direction: row;
+			padding: 1rem;
+		}
 	}
 
 	.modal__poster {
-		max-height: 32rem;
-		border-radius: 0.5rem;
+		max-height: 16rem;
+
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: scale-down;
+		}
+
+		@media ${theme.breakpoints.md} {
+			max-height: 100%;
+			min-width: 18rem;
+			width: 100%;
+		}
+
+		@media ${theme.breakpoints.lg} {
+			min-width: 22rem;
+		}
 	}
 
 	.modal__description {
-		padding: 1rem;
+		padding: 1rem .5rem;
+
+		@media ${theme.breakpoints.md} {
+			padding: 1rem;
+			font-size: ${theme.fontSizes.exl};
+		}
 	}
 
 	.modal__title {
-		font-size: ${theme.fontSizes.exl};
+		font-size: ${theme.fontSizes.xl};
+
+		@media ${theme.breakpoints.md} {
+			font-size: ${theme.fontSizes.exl};
+		}
 	}
 
   .modal__original-title {
@@ -93,21 +122,26 @@ export const StyledModal = styled.div`
   }
 
   .modal__informations {
-    margin-top: 1rem;
+    margin-top: .25rem;
+		font-size: ${theme.fontSizes.sm};
+
+		@media ${theme.breakpoints.md} {
+    	margin-top: 1rem;
+			font-size: ${theme.fontSizes.base};
+		}
   }
 
 	.modal__overview {
-    margin-top: 1rem;
-    font-size: ${theme.fontSizes.base};
+    margin-top: .5rem;
+		font-size: ${theme.fontSizes.sm};
     font-weight: normal;
-		line-height: 1.5;
-	}
 
-  ${props => props.open ? `
-    display: block;
-  `:`
-    display: none;
-  `}
+		@media ${theme.breakpoints.md} {
+			margin-top: 1rem;
+			font-size: ${theme.fontSizes.base};
+			line-height: 1.5;
+		}
+	}
 `
 
 export const StyledSelector = styled.div`
@@ -122,17 +156,13 @@ export const StyledSelector = styled.div`
 	justify-content: center;
 	border-radius: 999px;
 	padding: .5rem;
-	background-color: #eee;
-	color: #333;
+	background-color: ${theme.colors.secondary};
+	color: ${theme.colors.primary};
 	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-	width: fit-content;
+	width: max-content;
 
 	.selector__title {
 		margin: 0 .5rem;
-	}
-
-	.selector__options {
-		
 	}
 
 	@media ${theme.breakpoints.md} {
@@ -161,7 +191,8 @@ export const StyledButton = styled.button`
 		background: ${theme.colors.ptDark};
 		color: #eee;
 	` : `
-		background: #ccc;
+		background-color: ${theme.colors.tertiary};
+		color: ${theme.colors.primary};
 
 		:hover {
 			background: #ddd;

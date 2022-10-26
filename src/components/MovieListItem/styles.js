@@ -42,6 +42,7 @@ export const StyledItem = styled.a`
 		font-weight: bolder;
 		line-height: 1;
 		margin-bottom: .25rem;
+		hyphens: auto;
 	}
 
 	.item__release {
